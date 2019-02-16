@@ -1,7 +1,8 @@
 
-******************************
-You have tried to change the API from what has been previously released in
-an SDK.  Please fix the errors listed above.
-******************************
+******************************************
+You have tried to change the API from what
+has been previously released in an SDK.
 
+Please fix the errors listed above.
+******************************************
 
