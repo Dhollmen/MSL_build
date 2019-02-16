@@ -520,10 +520,6 @@ function print_lunch_menu()
         i=$(($i+1))
     done | column
 
-    if [ "z${SLIM_DEVICES_ONLY}" != "z" ]; then
-       echo "... and don't forget the bacon!"
-    fi
-
     echo
 }
 
@@ -554,7 +550,6 @@ function breakfast()
     add_lunch_combo full-eng
     for f in `/bin/ls vendor/slim/vendorsetup.sh 2> /dev/null`
         do
-            echo "including $f"
             . $f
         done
     unset f
@@ -620,6 +615,8 @@ function lunch()
 
     local product=$(echo -n $selection | sed -e "s/-.*$//")
     check_product $product
+    
+    
     if [ $? -ne 0 ]
     then
         # if we can't find a product, try to grab it off the SLIM github
@@ -635,7 +632,6 @@ function lunch()
     then
         echo
         echo "** Don't have a product spec for: '$product'"
-        echo "** Do you have the right repo manifest?"
         product=
     fi
 
@@ -2052,9 +2048,9 @@ function mk_timer()
     fi
     echo
     if [ $ret -eq 0 ] ; then
-        printf "${color_success}#### make completed successfully "
+        printf "${color_success}#### build completed successfully "
     else
-        printf "${color_failed}#### make failed to build some targets "
+        printf "${color_failed}**** FAILED to build some targets "
     fi
     if [ $hours -gt 0 ] ; then
         printf "(%02g:%02g:%02g (hh:mm:ss))" $hours $mins $secs
@@ -2088,7 +2084,6 @@ fi
 for f in `test -d device && find -L device -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort` \
          `test -d vendor && find -L vendor -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort`
 do
-    echo "including $f"
     . $f
 done
 unset f
@@ -2099,7 +2094,6 @@ check_bash_version && {
     for dir in $dirs; do
     if [ -d ${dir} ]; then
         for f in `/bin/ls ${dir}/[a-z]*.bash 2> /dev/null`; do
-            echo "including $f"
             . $f
         done
     fi
