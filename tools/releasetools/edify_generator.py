@@ -150,6 +150,11 @@ class EdifyGenerator(object):
   def RunBackup(self, command):
     self.script.append(('run_program("/tmp/install/bin/backuptool.sh", "%s");' % command))
 
+  def DeleteRecovery(self, command):
+    self.script.append('delete("/system/etc/recovery-resource.dat");')
+    self.script.append('delete("/system/recovery-from-boot.p");')
+    self.script.append('delete("/system/bin/install-recovery.sh");')
+
   def ValidateSignatures(self, command):
     self.script.append('package_extract_file("META-INF/org/slimroms/releasekey", "/tmp/releasekey");')
     # Exit code 124 == abort. run_program returns raw, so left-shift 8bit

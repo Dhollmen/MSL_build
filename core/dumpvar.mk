@@ -112,6 +112,9 @@ ifeq ($(DONT_DEXPREOPT_PREBUILTS),true)
 else
   $(info DONT_DEXPREOPT_PREBUILTS=false)
 endif
+ifeq ($(DELETE_RECOVERY),true)
+  $(info DELETE_RECOVERY=true)
+endif
 ifeq ($(CYNGN_TARGET),true)
   $(info   CYNGN_TARGET=$(CYNGN_TARGET))
   $(info   CYNGN_FEATURES=$(CYNGN_FEATURES))

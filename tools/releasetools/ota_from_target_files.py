@@ -726,6 +726,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.ShowProgress(0.02, 10)
     if block_based:
       script.Mount("/system")
+    if os.environ.get("DELETE_RECOVERY") == "true":
+      script.DeleteRecovery("")      
     script.RunBackup("restore")
     if block_based:
       script.Unmount("/system")
