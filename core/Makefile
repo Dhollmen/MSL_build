@@ -86,12 +86,12 @@ $(INSTALLED_DEFAULT_PROP_TARGET): $(intermediate_system_build_prop)
 	@echo Target buildinfo: $@
 	@mkdir -p $(dir $@)
 	$(hide) echo "#" > $@; \
-	        echo "# ADDITIONAL_DEFAULT_PROPERTIES" >> $@; \
+	        echo "# Additional Default Properties" >> $@; \
 	        echo "#" >> $@;
 	$(hide) $(foreach line,$(ADDITIONAL_DEFAULT_PROPERTIES), \
 		echo "$(line)" >> $@;)
 	$(hide) echo "#" >> $@; \
-	        echo "# BOOTIMAGE_BUILD_PROPERTIES" >> $@; \
+	        echo "# Boot Image Build Properties" >> $@; \
 	        echo "#" >> $@;
 	$(hide) echo ro.bootimage.build.date=`date`>>$@
 	$(hide) echo ro.bootimage.build.date.utc=`date +%s`>>$@
@@ -209,14 +209,17 @@ endif
 $(intermediate_system_build_prop): $(BUILDINFO_SH) $(INTERNAL_BUILD_ID_MAKEFILE) $(BUILD_SYSTEM)/version_defaults.mk $(system_prop_file) $(INSTALLED_ANDROID_INFO_TXT_TARGET)
 	@echo Target buildinfo: $@
 	@mkdir -p $(dir $@)
-	$(hide) echo > $@
+	$(hide) echo "#" > $@;
 ifneq ($(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_OEM_PROPERTIES),)
 	$(hide) echo "#" >> $@; \
-	        echo "# PRODUCT_OEM_PROPERTIES" >> $@; \
+	        $(hide) echo "# Product Oem Properties" >> $@; \
 	        echo "#" >> $@;
 	$(hide) $(foreach prop,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_OEM_PROPERTIES), \
 		echo "import /oem/oem.prop $(prop)" >> $@;)
+		$(hide) echo "#" >> $@;
 endif
+	$(hide) echo "# Build Properties" >> $@; \
+		echo "#" >> $@;
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 			TARGET_BUILD_FLAVOR="$(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT)" \
 			TARGET_DEVICE="$(TARGET_VENDOR_DEVICE_NAME)" \
@@ -255,16 +258,12 @@ endif
 	        bash $(BUILDINFO_SH) >> $@
 	$(hide) $(foreach file,$(system_prop_file), \
 		if [ -f "$(file)" ]; then \
-			echo "#" >> $@; \
 			echo Target buildinfo from: "$(file)"; \
-			echo "# from $(file)" >> $@; \
-			echo "#" >> $@; \
 			cat $(file) >> $@; \
 		fi;)
 	$(if $(ADDITIONAL_BUILD_PROPERTIES), \
-		$(hide) echo >> $@; \
-		        echo "#" >> $@; \
-		        echo "# ADDITIONAL_BUILD_PROPERTIES" >> $@; \
+		$(hide) echo "#" >> $@; \
+		        echo "# Additional Build Properties" >> $@; \
 		        echo "#" >> $@; )
 	$(hide) $(foreach line,$(ADDITIONAL_BUILD_PROPERTIES), \
 		echo "$(line)" >> $@;)
