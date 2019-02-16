@@ -63,40 +63,58 @@ endif # CALLED_FROM_SETUP
 
 
 ifneq ($(PRINT_BUILD_CONFIG),)
+$(info ==========================================)
 HOST_OS_EXTRA:=$(shell python -c "import platform; print(platform.platform())")
-$(info |==========================================|)
-$(info |               ___________________________|)
-$(info |              / ________________ad8888ba, |)
-$(info |             / /               8P'    "Y8 |)
-$(info |            / / _ _           d8          |)
-$(info |           / / | (_)          88,dd888bb, |)
-$(info |          / /  | |_ _ __ ___  88P'    `8b |)
-$(info |         / /   | | | '_ ` _ \ 88       d8 |)
-$(info |________/ /    | | | | | | | |88a     a8P |)
-$(info |_________/     |_|_|_| |_| |_| "Y88888P"  |)
-$(info |==========================================|)
-$(info   PLATFORM_VERSION_CODENAME=$(PLATFORM_VERSION_CODENAME))
-$(info   PLATFORM_VERSION=$(PLATFORM_VERSION))
 $(info   SLIM_VERSION=$(SLIM_VERSION))
+$(info   BUILD_ID=$(BUILD_ID))
+$(info   PLATFORM_VERSION=$(PLATFORM_VERSION))
+$(info   PLATFORM_VERSION_CODENAME=$(PLATFORM_VERSION_CODENAME))
 $(info   TARGET_PRODUCT=$(TARGET_PRODUCT))
 $(info   TARGET_BUILD_VARIANT=$(TARGET_BUILD_VARIANT))
 $(info   TARGET_BUILD_TYPE=$(TARGET_BUILD_TYPE))
+ifneq ($(TARGET_BUILD_APPS),)
 $(info   TARGET_BUILD_APPS=$(TARGET_BUILD_APPS))
+endif
 $(info   TARGET_ARCH=$(TARGET_ARCH))
 $(info   TARGET_ARCH_VARIANT=$(TARGET_ARCH_VARIANT))
 $(info   TARGET_CPU_VARIANT=$(TARGET_CPU_VARIANT))
+ifneq ($(TARGET_2ND_ARCH),)
 $(info   TARGET_2ND_ARCH=$(TARGET_2ND_ARCH))
+endif
+ifneq ($(TARGET_2ND_ARCH_VARIANT),)
 $(info   TARGET_2ND_ARCH_VARIANT=$(TARGET_2ND_ARCH_VARIANT))
+endif
+ifneq ($(TARGET_2ND_CPU_VARIANT),)
 $(info   TARGET_2ND_CPU_VARIANT=$(TARGET_2ND_CPU_VARIANT))
+endif
 $(info   HOST_ARCH=$(HOST_ARCH))
 $(info   HOST_OS=$(HOST_OS))
 $(info   HOST_OS_EXTRA=$(HOST_OS_EXTRA))
 $(info   HOST_BUILD_TYPE=$(HOST_BUILD_TYPE))
-$(info   BUILD_ID=$(BUILD_ID))
 $(info   OUT_DIR=$(OUT_DIR))
-ifeq ($(CYNGN_TARGET),true)
-$(info   CYNGN_TARGET=$(CYNGN_TARGET))
-$(info   CYNGN_FEATURES=$(CYNGN_FEATURES))
+ifeq ($(BLOCK_BASED_OTA),false)
+  $(info BLOCK_BASED_OTA=false)
+else
+  $(info BLOCK_BASED_OTA=true)
 endif
-$(info ============================================)
+ifeq ($(WITH_DEXPREOPT),true)
+  $(info WITH_DEXPREOPT=true)
+else
+  $(info WITH_DEXPREOPT=false)
+endif
+ifeq ($(WITH_DEXPREOPT_PIC),true)
+  $(info WITH_DEXPREOPT_PIC=true)
+else
+  $(info WITH_DEXPREOPT_PIC=false)
+endif
+ifeq ($(DONT_DEXPREOPT_PREBUILTS),true)
+  $(info DONT_DEXPREOPT_PREBUILTS=true)
+else
+  $(info DONT_DEXPREOPT_PREBUILTS=false)
+endif
+ifeq ($(CYNGN_TARGET),true)
+  $(info   CYNGN_TARGET=$(CYNGN_TARGET))
+  $(info   CYNGN_FEATURES=$(CYNGN_FEATURES))
+endif
+$(info ==========================================)
 endif
