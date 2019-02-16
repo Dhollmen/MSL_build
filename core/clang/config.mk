@@ -26,7 +26,7 @@ CLANG_CONFIG_EXTRA_CPPFLAGS :=
 CLANG_CONFIG_EXTRA_LDFLAGS :=
 
 CLANG_CONFIG_EXTRA_CFLAGS += \
-  -D__compiler_offsetof=__builtin_offsetof
+  -D__compiler_offsetof=__builtin_offsetof 
 
 # Help catch common 32/64-bit errors.
 CLANG_CONFIG_EXTRA_CFLAGS += \
@@ -47,10 +47,18 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 CLANG_CONFIG_EXTRA_CFLAGS += \
   -Wno-unused-command-line-argument
 
+# Less warning messages
+CLANG_CONFIG_EXTRA_CFLAGS += \
+  -Qunused-arguments -Wno-unknown-warning-option
+
 # Disable -Winconsistent-missing-override until we can clean up the existing
 # codebase for it.
 CLANG_CONFIG_EXTRA_CPPFLAGS += \
   -Wno-inconsistent-missing-override
+
+# Less warning messages
+CLANG_CONFIG_EXTRA_CPPFLAGS += \
+  -Qunused-arguments -Wno-unknown-warning-option
 
 CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -finline-functions \
@@ -61,6 +69,7 @@ CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -fno-tree-sra \
   -fprefetch-loop-arrays \
   -funswitch-loops \
+  -funsafe-loop-optimizations \
   -Werror=unused-but-set-parameter \
   -Werror=unused-but-set-variable \
   -Wmaybe-uninitialized \
