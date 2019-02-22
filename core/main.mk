@@ -284,7 +284,7 @@ ifneq (,$(user_variant))
 
   ifeq ($(user_variant),userdebug)
     ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
-    ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+    ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
     ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
     tags_to_install += debug
   else
