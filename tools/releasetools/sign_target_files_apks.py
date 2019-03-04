@@ -499,8 +499,6 @@ def main(argv):
 
   add_img_to_target_files.AddImagesToTargetFiles(args[1])
 
-  print "done."
-
 
 if __name__ == '__main__':
   try:

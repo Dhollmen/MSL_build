@@ -2048,18 +2048,19 @@ function mk_timer()
     fi
     echo
     if [ $ret -eq 0 ] ; then
-        printf "${color_success}#### build completed successfully "
+        printf "${color_success}--- Build time : "
+        if [ $hours -gt 0 ] ; then
+            printf "%02g:%02g:%02g (hh:mm:ss)" $hours $mins $secs
+        elif [ $mins -gt 0 ] ; then
+            printf "%02g:%02g (mm:ss)" $mins $secs
+        elif [ $secs -gt 0 ] ; then
+            printf "%s seconds" $secs
+        fi
+        printf "${color_reset}\n\n"
     else
-        printf "${color_failed}**** FAILED to build some targets "
+        printf "${color_failed}****** FAILED to build some targets "
+        printf " ******${color_reset}\n\n"
     fi
-    if [ $hours -gt 0 ] ; then
-        printf "(%02g:%02g:%02g (hh:mm:ss))" $hours $mins $secs
-    elif [ $mins -gt 0 ] ; then
-        printf "(%02g:%02g (mm:ss))" $mins $secs
-    elif [ $secs -gt 0 ] ; then
-        printf "(%s seconds)" $secs
-    fi
-    printf " ####${color_reset}\n\n"
     return $ret
 }
 

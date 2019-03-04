@@ -629,18 +629,13 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   system_progress = 0.75
 
-  script.Print("                    _____________________ ")
-  script.Print("                   /    www.slimroms.org |")
-  script.Print("                  /                      |")
-  script.Print("                 /    ___________________|")
-  script.Print("                /    /    ___             ")
-  script.Print("               /    / ___/   \            ")
-  script.Print("              /    / /   \___/____   ____ ")
-  script.Print("             /    /  |   |___/    \_/    |")
-  script.Print(" ___________/    /   |   |   |           |")
-  script.Print("|               /    |   |   |   |   |   |")
-  script.Print("|              /     |   |   |   |   |   |")
-  script.Print("|_____________/      \___^___^___^___^___/")
+  script.Print(" ")
+  script.Print("_____________________ ")
+  script.Print(" ")
+  script.Print(" Dhollmen - Custom Rom ")
+  script.Print("   SlimRoms 6 based")
+  script.Print(" ")
+  script.Print("_____________________ ")
   script.Print(" ")
 
   if OPTIONS.wipe_user_data:
@@ -1686,7 +1681,7 @@ def main(argv):
         OPTIONS.input_tmp, "BOOT", "RAMDISK", "file_contexts")
 
   if OPTIONS.verbose:
-    print "--- target info ---"
+    print "\n--- target info"
     common.DumpInfoDict(OPTIONS.info_dict)
 
   # If the caller explicitly specified the device-specific extensions
@@ -1721,7 +1716,7 @@ def main(argv):
 
     cache_size = OPTIONS.info_dict.get("cache_size", None)
     if cache_size is None:
-      print "--- can't determine the cache partition size ---"
+      print "--- can't determine the cache partition size"
     OPTIONS.cache_size = cache_size
 
     if OPTIONS.incremental_source is None:
@@ -1747,7 +1742,7 @@ def main(argv):
             "default_system_dev_certificate",
             "build/target/product/security/testkey")
       if OPTIONS.verbose:
-        print "--- source info ---"
+        print "\n--- source info"
         common.DumpInfoDict(OPTIONS.source_info_dict)
       try:
         WriteIncrementalOTAPackage(input_zip, source_zip, output_zip)
@@ -1756,15 +1751,13 @@ def main(argv):
       except ValueError:
         if not OPTIONS.fallback_to_full:
           raise
-        print "--- failed to build incremental; falling back to full ---"
+        print "--- failed to build incremental; falling back to full"
         OPTIONS.incremental_source = None
         common.ZipClose(output_zip)
 
   if not OPTIONS.no_signing:
     SignOutput(temp_zip_file.name, args[1])
     temp_zip_file.close()
-
-  print "done."
 
 
 if __name__ == '__main__':

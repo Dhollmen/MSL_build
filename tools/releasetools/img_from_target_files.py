@@ -142,7 +142,7 @@ def main(argv):
         recovery_image.AddToZip(output_zip)
 
       def banner(s):
-        print "\n\n++++ " + s + " ++++\n\n"
+        print "\n---- " + s          
 
       if not bootable_only:
         banner("AddSystem")
@@ -168,9 +168,6 @@ def main(argv):
     print "cleaning up..."
     common.ZipClose(output_zip)
     shutil.rmtree(OPTIONS.input_tmp)
-
-  print "done."
-
 
 if __name__ == '__main__':
   try:

@@ -340,7 +340,7 @@ def AddImagesToTargetFiles(filename):
                                compression=zipfile.ZIP_DEFLATED)
 
   def banner(s):
-    print "\n\n++++ " + s + " ++++\n\n"
+    print "\n---- " + s
 
   banner("boot")
   prebuilt_path = os.path.join(OPTIONS.input_tmp, "IMAGES", "boot.img")
@@ -418,7 +418,6 @@ def main(argv):
     sys.exit(1)
 
   AddImagesToTargetFiles(args[0])
-  print "done."
 
 if __name__ == '__main__':
   try:
