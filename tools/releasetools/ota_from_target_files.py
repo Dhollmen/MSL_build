@@ -630,12 +630,12 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   system_progress = 0.75
 
   script.Print(" ")
-  script.Print("_____________________ ")
+  script.Print("_____________________")
   script.Print(" ")
-  script.Print(" Dhollmen - Custom Rom ")
-  script.Print("   SlimRoms 6 based")
+  script.Print("Dhollmen - Custom Rom")
+  script.Print("   SlimRom 6 based   ")
   script.Print(" ")
-  script.Print("_____________________ ")
+  script.Print("_____________________")
   script.Print(" ")
 
   if OPTIONS.wipe_user_data:
