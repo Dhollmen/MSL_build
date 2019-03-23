@@ -1084,13 +1084,16 @@ ifneq ($(OEM_THUMBPRINT_PROPERTIES),)
 	@echo "oem_fingerprint_properties=$(OEM_THUMBPRINT_PROPERTIES)" >> $(ota_temp_root)/META/misc_info.txt
 endif
 	$(call generate-userimage-prop-dictionary, $(ota_temp_root)/META/misc_info.txt)
-	$(hide) cp -r $(PRODUCT_OUT)/boot.img $(ota_temp_root)/BOOTABLE_IMAGES/
-	$(hide) cp -r $(PRODUCT_OUT)/recovery.img $(ota_temp_root)/BOOTABLE_IMAGES/
-	$(hide) ./build/tools/releasetools/make_recovery_patch $(ota_temp_root) $(ota_temp_root)
+	$(hide) cp -r $(PRODUCT_OUT)/boot.img $(ota_temp_root)/BOOTABLE_IMAGES
 	$(hide) rm -f $(TARGET_OUT)/bin/install-recovery.sh
 	$(hide) rm -f $(TARGET_OUT)/recovery-from-boot.p
+	$(hide) rm -f $(TARGET_OUT)/etc/recovery-resource.dat
+	$(hide) cp -r $(PRODUCT_OUT)/recovery.img $(ota_temp_root)/BOOTABLE_IMAGES
+ifneq ($(strip $(DELETE_RECOVERY)),false)
+	$(hide) ./build/tools/releasetools/make_recovery_patch $(ota_temp_root) $(ota_temp_root)
 	$(hide) cp $(ota_temp_root)/SYSTEM/bin/install-recovery.sh $(TARGET_OUT)/bin/install-recovery.sh
 	$(hide) cp $(ota_temp_root)/SYSTEM/recovery-from-boot.p $(TARGET_OUT)/recovery-from-boot.p
+endif
 
 $(RECOVERY_RESOURCE_ZIP): $(INSTALLED_RECOVERYIMAGE_TARGET)
 	$(hide) mkdir -p $(dir $@)
