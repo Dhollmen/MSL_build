@@ -114,6 +114,12 @@ else
 endif
 ifeq ($(DELETE_RECOVERY),true)
   $(info DELETE_RECOVERY=true)
+else
+  ifeq ($(DELETE_RECOVERY),false)
+    $(info DELETE_RECOVERY=false)
+  else
+    $(info DELETE_RECOVERY=)
+  endif
 endif
 ifeq ($(CYNGN_TARGET),true)
   $(info   CYNGN_TARGET=$(CYNGN_TARGET))
